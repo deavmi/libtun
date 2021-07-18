@@ -17,15 +17,25 @@
 #include<linux/if.h>
 #include<linux/if_tun.h>
 #include<fcntl.h>
+#include<string.h>
+#include<sys/ioctl.h>
 
-int createTun(char* interfaceName, short iffFlags)
+int createTun(char* interfaceName, int iffFlags)
 {
     /* TODO: Add all required error checking */
     int tunFD = open("/dev/net/tun", O_RDWR);
 
+    /* TUN properties */
     struct ifreq interfaceReqData;
 
+    /* Set the flags for the tun adapter */
     interfaceReqData.ifr_flags = iffFlags;
+
+    /* Set the requested interface's name */
+    strcpy(interfaceReqData.ifr_name, interfaceName);
+
+    /* Attempt to bring up the tun device node */
+    tunFD = ioctl(tunFD, TUNSETIFF, &interfaceReqData);
 
 
     return tunFD;
