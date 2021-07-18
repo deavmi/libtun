@@ -41,7 +41,7 @@ int createTun(char* interfaceName, int iffFlags)
     {
         tunFD =  tunStatus;
     }
-    
+
     return tunFD;
 }
 
@@ -50,3 +50,7 @@ int destroyTun(int fd)
     return 68;
 }
 
+int tunWrite(int fd, char* data, int length)
+{
+    write(fd, data, length);
+}

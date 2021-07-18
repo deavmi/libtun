@@ -3,7 +3,7 @@ module libtun.adapter;
 extern (C) int ioctl(int fd, ulong request, void* data);
 extern (C) int open(char* path, int flags);
 
-import std.stdio;
+import core.stdc.stdio;
 
 
 /**
@@ -11,17 +11,21 @@ import std.stdio;
 */
 extern (C) int createTun(char* interfaceName, int iffFlags);
 extern (C) int destroyTun(int fd);
+extern (C) int tunWrite(int fd, char* data, int length);
 
 public class TUNAdapter
 {
+    /* Tunnel device descriptor */
+    private int tunFD;
+
     this(string interfaceName)
     {
-        init();
+        init(interfaceName);
     }
 
-    private void init()
+    private void init(string interfaceName)
     {
-        int tunFD = createTun(cast(char*)"dd", 1);
+        tunFD = createTun(cast(char*)interfaceName, 1);
         if(tunFD < 0)
         {
             throw new TUNException("Error creating tun device");
@@ -35,7 +39,7 @@ public class TUNAdapter
 
     public void send(byte[] buffer)
     {
-
+        tunWrite(tunFD, cast(char*)buffer.ptr, cast(int)buffer.length);
     }
 }
 
