@@ -1,0 +1,12 @@
+{
+	"authors": [
+		"Tristan B. Kildaire"
+	],
+	"copyright": "Copyright © 2021, Tristan B. Kildaire",
+	"description": "TUN adapter for D",
+	"license": "GPLv3",
+	"name": "libtun",
+	"targetType": "executable",
+	"preBuildCommands": ["gcc source/libtun/tunctl.c -o tunctl.o -c"],
+	"lflags": ["tunctl.o"]
+}
