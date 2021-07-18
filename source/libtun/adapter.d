@@ -4,7 +4,7 @@ extern (C) int ioctl(int fd, ulong request, void* data);
 extern (C) int open(char* path, int flags);
 
 import std.stdio;
-import core.stdc.stdio;
+
 
 /**
 * TUN maintenance routines in `test.c`
@@ -22,10 +22,10 @@ public class TUNAdapter
     private void init()
     {
         int tunFD = createTun(cast(char*)"dd", 1);
-        writeln(tunFD);
-        writeln();
-        writeln(destroyTun(1));
-        ioctl(0,0,cast(void*)0);
+        if(tunFD < 0)
+        {
+            throw new TUNException("Error creating tun device");
+        }
     }
 
     public void receive(byte[] buffer)
@@ -36,5 +36,13 @@ public class TUNAdapter
     public void send(byte[] buffer)
     {
 
+    }
+}
+
+public final class TUNException : Exception
+{
+    this(string msg)
+    {
+        super(msg);
     }
 }
