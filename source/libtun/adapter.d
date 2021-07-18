@@ -76,8 +76,8 @@ public final class TUNException : Exception
     }
 }
 
-public enum AdapterType
+public enum AdapterType : ushort
 {
-    TUN,
-    TAP
+    TUN = 1,
+    TAP = 0
 }
