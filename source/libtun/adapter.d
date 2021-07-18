@@ -9,7 +9,7 @@ import core.stdc.stdio;
 /**
 * TUN maintenance routines in `test.c`
 */
-extern (C) int createTun(char* interafce);
+extern (C) int createTun(char* interfaceName, short iffFlags);
 extern (C) int destroyTun(int fd);
 
 public class TUNAdapter
@@ -23,7 +23,7 @@ public class TUNAdapter
     {
         int tunFD = open(cast(char*)"/dev/net/tun", _F_RDWR);
         writeln(tunFD);
-        writeln(createTun(cast(char*)""));
+        writeln(createTun(cast(char*)"", 1));
         writeln(destroyTun(1));
         ioctl(0,0,cast(void*)0);
     }

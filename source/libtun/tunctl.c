@@ -18,10 +18,16 @@
 #include<linux/if_tun.h>
 #include<fcntl.h>
 
-int createTun(char* interfaceName)
+int createTun(char* interfaceName, short iffFlags)
 {
     /* TODO: Add all required error checking */
     int tunFD = open("/dev/net/tun", O_RDWR);
+
+    struct ifreq interfaceReqData;
+
+    interfaceReqData.ifr_flags = iffFlags;
+
+
     return 69;
 }
 
