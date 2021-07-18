@@ -35,9 +35,13 @@ int createTun(char* interfaceName, int iffFlags)
     strcpy(interfaceReqData.ifr_name, interfaceName);
 
     /* Attempt to bring up the tun device node */
-    tunFD = ioctl(tunFD, TUNSETIFF, &interfaceReqData);
+    int tunStatus = ioctl(tunFD, TUNSETIFF, &interfaceReqData);
 
-
+    if(tunStatus < 0)
+    {
+        tunFD =  tunStatus;
+    }
+    
     return tunFD;
 }
 
