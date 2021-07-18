@@ -11,6 +11,9 @@ void main()
 	while(true)
 	{
 		adapter.send([1,1,2,2,2,2]);
+		byte[] buffer;
+		adapter.receive(buffer);
+		writeln(buffer);
 		Thread.sleep(dur!("msecs")(500));
 	}
 	

@@ -54,3 +54,14 @@ int tunWrite(int fd, char* data, int length)
 {
     write(fd, data, length);
 }
+
+/**
+* TODO: Depending on mode we need to read a certain amount
+* to get the length and then from there move onwards
+*
+* (FIXME: For now we just read 20 bytes)
+*/
+int tunRead(int fd, char* data)
+{
+    read(fd, data, 400);
+}
