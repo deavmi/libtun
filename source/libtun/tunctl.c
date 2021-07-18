@@ -28,6 +28,8 @@ int createTun(char* interfaceName, int iffFlags)
     /* TUN properties */
     struct ifreq interfaceReqData;
 
+    /* TODO: Do tuntype */
+
     /* Set the flags for the tun adapter */
     interfaceReqData.ifr_flags = iffFlags;
 
