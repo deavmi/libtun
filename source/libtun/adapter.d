@@ -21,9 +21,9 @@ public class TUNAdapter
 
     private void init()
     {
-        int tunFD = open(cast(char*)"/dev/net/tun", _F_RDWR);
+        int tunFD = createTun(cast(char*)"", 1);
         writeln(tunFD);
-        writeln(createTun(cast(char*)"", 1));
+        writeln();
         writeln(destroyTun(1));
         ioctl(0,0,cast(void*)0);
     }
