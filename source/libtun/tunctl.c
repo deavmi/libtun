@@ -28,7 +28,7 @@ int createTun(char* interfaceName, short iffFlags)
     interfaceReqData.ifr_flags = iffFlags;
 
 
-    return 69;
+    return tunFD;
 }
 
 int destroyTun(int fd)
