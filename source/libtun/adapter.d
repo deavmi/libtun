@@ -12,7 +12,7 @@ import core.stdc.stdio;
 extern (C) int createTun(char* interfaceName, int iffFlags);
 extern (C) int destroyTun(int fd);
 extern (C) int tunWrite(int fd, char* data, int length);
-extern (C) int tunRead(int fd, char* data);
+extern (C) int tunRead(int fd, char* data, int amount);
 
 public class TUNAdapter
 {
@@ -27,7 +27,7 @@ public class TUNAdapter
 
     private void init(string interfaceName)
     {
-        tunFD = createTun(cast(char*)interfaceName, 1);
+        tunFD = createTun(cast(char*)interfaceName, 4096|2);
         if(tunFD < 0)
         {
             throw new TUNException("Error creating tun device");
@@ -50,14 +50,51 @@ public class TUNAdapter
         destroyTun(tunFD);
     }
 
+    
     public void receive(ref byte[] buffer)
     {
         sanityCheck();
 
-        /* TODO: Get amount read */
-        /* FIXME: For now set it length to 20 */
-        buffer.length = 400;
-        tunRead(tunFD, cast(char*)buffer.ptr);
+        ushort mtu = cast(ushort)-1;
+
+        /* Temporary scratchpad buffer */
+        byte[] scratch;
+        scratch.length = mtu;
+
+        /**
+        * We read with a request of maximum possible
+        * Ethernet frame size (-1 -> 2 bytes) 65535,
+        * this ensures our buffer fills up in all cases
+        * but we get returned either < 0 or > 0.
+        *
+        * Former, systemcall read error
+        * Latter, ethernet frame size
+        */
+        int status = tunRead(tunFD, cast(char*)scratch.ptr, mtu);
+
+      
+        if(status < 0)
+        {
+
+        }
+        else if(status == 0)
+        {
+            assert(false);
+        }
+        else
+        {
+            /* Copy the data into their buffer (and of correct length) */
+            buffer = scratch[0..status];
+        }
+
+        
+
+      
+
+
+
+
+        
     }
 
     public void send(byte[] buffer)

@@ -63,7 +63,7 @@ int tunWrite(int fd, char* data, int length)
 *
 * (FIXME: For now we just read 20 bytes)
 */
-int tunRead(int fd, char* data)
+int tunRead(int fd, char* data, int amount)
 {
-    read(fd, data, 400);
+    return read(fd, data, amount);
 }
