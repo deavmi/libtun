@@ -55,6 +55,7 @@ public class TUNAdapter
     {
         sanityCheck();
 
+        /* TODO: Get device MTU and add functions for setting it */
         ushort mtu = cast(ushort)-1;
 
         /* Temporary scratchpad buffer */
@@ -75,7 +76,7 @@ public class TUNAdapter
       
         if(status < 0)
         {
-
+            throw new TUNException("Read failed");
         }
         else if(status == 0)
         {
@@ -102,6 +103,16 @@ public class TUNAdapter
         sanityCheck();
 
         tunWrite(tunFD, cast(char*)buffer.ptr, cast(int)buffer.length);
+    }
+
+    public void close()
+    {
+        int status = destroyTun(tunFD);
+
+        if(status)
+        {
+            throw new TUNException("Closing tun interface failed");
+        }
     }
 }
 
