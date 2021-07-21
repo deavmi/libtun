@@ -14,7 +14,7 @@ void main()
 		byte[] buffer;
 		adapter.receive(buffer);
 		writeln(buffer);
-		Thread.sleep(dur!("msecs")(500));
+		Thread.sleep(dur!("msecs")(50));
 	}
 	
 }
