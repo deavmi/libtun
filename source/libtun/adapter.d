@@ -20,6 +20,10 @@ public class TUNAdapter
     private int tunFD;
     private bool isClosed;
 
+    /* Temporary scratchpad buffer */
+    private byte[] scratch;
+        
+
     this(string interfaceName, AdapterType adapterType = AdapterType.TAP)
     {
         init(interfaceName);
@@ -32,6 +36,10 @@ public class TUNAdapter
         {
             throw new TUNException("Error creating tun device");
         }
+
+        /* TODO: Get device MTU and add functions for setting it */
+        ushort mtu = cast(ushort)-1;
+        scratch.length = mtu;
     }
 
     private void sanityCheck()
@@ -55,12 +63,7 @@ public class TUNAdapter
     {
         sanityCheck();
 
-        /* TODO: Get device MTU and add functions for setting it */
-        ushort mtu = cast(ushort)-1;
-
-        /* Temporary scratchpad buffer */
-        byte[] scratch;
-        scratch.length = mtu;
+        
 
         /**
         * We read with a request of maximum possible
@@ -71,7 +74,7 @@ public class TUNAdapter
         * Former, systemcall read error
         * Latter, ethernet frame size
         */
-        int status = tunRead(tunFD, cast(char*)scratch.ptr, mtu);
+        int status = tunRead(tunFD, cast(char*)scratch.ptr, cast(int)scratch.length);
 
       
         if(status < 0)
@@ -85,7 +88,7 @@ public class TUNAdapter
         else
         {
             /* Copy the data into their buffer (and of correct length) */
-            buffer = scratch[0..status];
+            buffer = scratch[0..status].dup;
         }
 
         
