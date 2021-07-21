@@ -6,7 +6,7 @@
 	"description": "TUN adapter for D",
 	"license": "GPLv3",
 	"name": "libtun",
-	"targetType": "executable",
+	"targetType": "library",
 	"preBuildCommands": ["gcc source/libtun/tunctl.c -o tunctl.o -c"],
 	"lflags": ["tunctl.o"]
 }

@@ -13,3 +13,4 @@ libtun-test-*
 *.o
 *.obj
 *.lst
+dub.json

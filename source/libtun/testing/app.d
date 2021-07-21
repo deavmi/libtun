@@ -1,3 +1,5 @@
+module libtun.testing.app;
+
 import std.stdio;
 
 import libtun.adapter;
