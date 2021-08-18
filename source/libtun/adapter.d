@@ -108,15 +108,16 @@ public class TUNAdapter
         tunWrite(tunFD, cast(char*)buffer.ptr, cast(int)buffer.length);
     }
 
-    public void close()
-    {
-        int status = destroyTun(tunFD);
 
-        if(status)
-        {
-            throw new TUNException("Closing tun interface failed");
-        }
+    public void setDeviceMTU(ushort mtu)
+    {
+        /* TODO: Set the MTU on the device */
+
+        /* TODO: Set the scratchpad to match the MTU */
+        scratch.length = mtu;
     }
+
+   
 }
 
 public final class TUNException : Exception
