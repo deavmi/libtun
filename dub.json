@@ -7,6 +7,6 @@
 	"license": "LGPLv3",
 	"name": "libtun",
 	"targetType": "library",
-	"preBuildCommands": ["gcc $PACKAGE_DIR/source/libtun/tunctl.c -o $PACKAGE_DIR/source/tunctl.o -c"],
+	"preBuildCommands": ["cc $PACKAGE_DIR/source/libtun/tunctl.c -o $PACKAGE_DIR/source/tunctl.o -c"],
 	"lflags": ["$PACKAGE_DIR/source/tunctl.o"]
 }
