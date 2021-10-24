@@ -4,7 +4,7 @@
 	],
 	"copyright": "Copyright © 2021, Tristan B. Kildaire",
 	"description": "TUN adapter for D",
-	"license": "GPLv3",
+	"license": "LGPLv3",
 	"name": "libtun",
 	"targetType": "library",
 	"preBuildCommands": ["gcc $PACKAGE_DIR/source/libtun/tunctl.c -o $PACKAGE_DIR/source/tunctl.o -c"],
