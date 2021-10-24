@@ -7,6 +7,6 @@
 	"license": "GPLv3",
 	"name": "libtun",
 	"targetType": "library",
-	"preBuildCommands": ["gcc ~/.dub/packages/libtun-0.0.7/libtun/source/libtun/tunctl.c -o ~/.dub/packages/libtun-0.0.7/libtun/source/tunctl.o -c"],
-	"lflags": ["~/.dub/packages/libtun-0.0.7/libtun/source/tunctl.o"]
+	"preBuildCommands": ["gcc $PACKAGE_DIR/source/libtun/tunctl.c -o $PACKAGE_DIR/source/tunctl.o -c"],
+	"lflags": ["$PACKAGE_DIR/source/tunctl.o"]
 }
