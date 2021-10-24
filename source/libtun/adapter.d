@@ -26,12 +26,12 @@ public class TUNAdapter
 
     this(string interfaceName, AdapterType adapterType = AdapterType.TAP)
     {
-        init(interfaceName);
+        init(interfaceName, adapterType);
     }
 
-    private void init(string interfaceName)
+    private void init(string interfaceName, AdapterType adapterType)
     {
-        tunFD = createTun(cast(char*)interfaceName, 4096|2);
+        tunFD = createTun(cast(char*)interfaceName, 4096|adapterType);
         if(tunFD < 0)
         {
             throw new TUNException("Error creating tun device");
@@ -128,8 +128,8 @@ public final class TUNException : Exception
     }
 }
 
-public enum AdapterType : ushort
+public enum AdapterType : byte
 {
     TUN = 1,
-    TAP = 0
+    TAP = 2
 }
