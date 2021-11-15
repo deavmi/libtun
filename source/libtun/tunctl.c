@@ -56,12 +56,12 @@ uint32_t createTun(char* interfaceName, int32_t iffFlags)
     return tunFD;
 }
 
-uint32_t destroyTun(int fd)
+uint32_t destroyTun(uint32_t fd)
 {
     return close(fd);
 }
 
-uint32_t tunWrite(int fd, char* data, int length)
+uint32_t tunWrite(uint32_t fd, char* data, int length)
 {
     write(fd, data, length);
 }
@@ -72,7 +72,10 @@ uint32_t tunWrite(int fd, char* data, int length)
 *
 * (FIXME: For now we just read 20 bytes)
 */
-uint32_t tunRead(int fd, char* data, int amount)
+uint32_t tunRead(uint32_t fd, char* data, int amount)
 {
     return read(fd, data, amount);
 }
+
+
+// uint32_t tunSet()
