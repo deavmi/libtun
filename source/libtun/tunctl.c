@@ -20,11 +20,19 @@
 #include<string.h>
 #include<sys/ioctl.h>
 #include<unistd.h>
+#include<stdint.h>
 
-int createTun(char* interfaceName, int iffFlags)
+/* TODO: Update types here using stdint */
+uint32_t createTun(char* interfaceName, int32_t iffFlags)
 {
     /* TODO: Add all required error checking */
-    int tunFD = open("/dev/net/tun", O_RDWR);
+    int32_t tunFD = open("/dev/net/tun", O_RDWR);
+
+    /* If error */
+    if(tunFD < 0)
+    {
+        return tunFD;
+    }
 
     /* TUN properties */
     struct ifreq interfaceReqData;
@@ -38,22 +46,22 @@ int createTun(char* interfaceName, int iffFlags)
     strcpy(interfaceReqData.ifr_name, interfaceName);
 
     /* Attempt to bring up the tun device node */
-    int tunStatus = ioctl(tunFD, TUNSETIFF, &interfaceReqData);
+    int32_t tunStatus = ioctl(tunFD, TUNSETIFF, &interfaceReqData);
 
     if(tunStatus < 0)
     {
-        tunFD =  tunStatus;
+        tunFD = tunStatus;
     }
 
     return tunFD;
 }
 
-int destroyTun(int fd)
+uint32_t destroyTun(int fd)
 {
     return close(fd);
 }
 
-int tunWrite(int fd, char* data, int length)
+uint32_t tunWrite(int fd, char* data, int length)
 {
     write(fd, data, length);
 }
@@ -64,7 +72,7 @@ int tunWrite(int fd, char* data, int length)
 *
 * (FIXME: For now we just read 20 bytes)
 */
-int tunRead(int fd, char* data, int amount)
+uint32_t tunRead(int fd, char* data, int amount)
 {
     return read(fd, data, amount);
 }
