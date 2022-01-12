@@ -1,6 +1,8 @@
 libtun
 ======
 
+![](branding/logo.png)
+
 TUN/TAP adapter for D-based applications
 
 ## Usage
