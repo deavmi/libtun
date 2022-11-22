@@ -1,0 +1,5 @@
+site_name: libtun
+theme: alabaster
+
+extra:
+  logo: logo.png
