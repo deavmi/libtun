@@ -1,20 +1,6 @@
 module libtun.adapter;
 
-// extern (C) int ioctl(int fd, ulong request, void* data);
-// extern (C) int open(char* path, int flags);
-
-import core.stdc.stdio;
-
-
-/**
-* TUN maintenance routines in `tunctl.c`
-* TODO: Use import C here
-*/
 import libtun.tunctl;
-// extern (C) int createTun(char* interfaceName, int iffFlags);
-// extern (C) int destroyTun(int fd);
-// extern (C) int tunWrite(int fd, char* data, int length);
-// extern (C) int tunRead(int fd, char* data, int amount);
 
 public class Adapter
 {
