@@ -8,11 +8,13 @@ import core.stdc.stdio;
 
 /**
 * TUN maintenance routines in `tunctl.c`
+* TODO: Use import C here
 */
-extern (C) int createTun(char* interfaceName, int iffFlags);
-extern (C) int destroyTun(int fd);
-extern (C) int tunWrite(int fd, char* data, int length);
-extern (C) int tunRead(int fd, char* data, int amount);
+import libtun.tunctl;
+// extern (C) int createTun(char* interfaceName, int iffFlags);
+// extern (C) int destroyTun(int fd);
+// extern (C) int tunWrite(int fd, char* data, int length);
+// extern (C) int tunRead(int fd, char* data, int amount);
 
 public class TUNAdapter
 {
@@ -48,6 +50,11 @@ public class TUNAdapter
         {
             throw new TUNException("Cannot operate on closed tunnel device");
         }
+    }
+
+    public void setAddress()
+    {
+        
     }
 
     public void close()

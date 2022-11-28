@@ -6,7 +6,5 @@
 	"description": "TUN adapter for D",
 	"license": "LGPL-3.0",
 	"name": "libtun",
-	"targetType": "library",
-	"preBuildCommands": ["cc $PACKAGE_DIR/source/libtun/tunctl.c -o $PACKAGE_DIR/source/tunctl.o -c"],
-	"lflags": ["$PACKAGE_DIR/source/tunctl.o"]
+	"targetType": "library"
 }
