@@ -26,6 +26,15 @@ public class TUNAdapter
     private byte[] scratch;
         
 
+    /** 
+     * Instantiates a new Adapter with the given interface name
+     * and optionally you can specifiy the adapter type (default
+     * is TAP)
+     *
+     * Params:
+     *   interfaceName = the name of the interface to create
+     *   adapterType = The AdapterType to use
+     */
     this(string interfaceName, AdapterType adapterType = AdapterType.TAP)
     {
         init(interfaceName, adapterType);
@@ -57,6 +66,12 @@ public class TUNAdapter
         
     }
 
+    /** 
+     * Closes the adapter
+     *
+     * Throws:
+     *      TUNException if the operation failed
+     */
     public void close()
     {
         sanityCheck();
@@ -65,7 +80,15 @@ public class TUNAdapter
         destroyTun(tunFD);
     }
 
-    
+    /** 
+     * Blocks to receive into the buffer
+     *
+     * Params:
+     *   buffer = The buffer variable to write the received
+     *            data into
+     * Throws:
+     *          TUNException if the read failed
+     */
     public void receive(ref byte[] buffer)
     {
         sanityCheck();
@@ -97,17 +120,16 @@ public class TUNAdapter
             /* Copy the data into their buffer (and of correct length) */
             buffer = scratch[0..status].dup;
         }
-
-        
-
-      
-
-
-
-
-        
     }
 
+    /** 
+     * Sends the provided data
+     *
+     * Params:
+     *   buffer = The data to send
+     * Throws:
+     *      TUNException if an error occurs
+     */
     public void send(byte[] buffer)
     {
         sanityCheck();
