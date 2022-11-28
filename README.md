@@ -13,9 +13,9 @@ First add it to your dub-based project via:
 dub add libtun
 ```
 
-### `TUNAdapter`
+### `Adapter`
 
-The `TUNAdapter` class provides you with all you need to get started. One can construct a new adapter as follows:
+The `Adapter` class provides you with all you need to get started. One can construct a new adapter as follows:
 
 ```d
 import libtun.adapter;

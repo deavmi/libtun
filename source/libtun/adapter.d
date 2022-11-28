@@ -16,7 +16,7 @@ import libtun.tunctl;
 // extern (C) int tunWrite(int fd, char* data, int length);
 // extern (C) int tunRead(int fd, char* data, int amount);
 
-public class TUNAdapter
+public class Adapter
 {
     /* Tunnel device descriptor */
     private int tunFD;

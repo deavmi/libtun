@@ -8,7 +8,7 @@ import core.thread;
 void main()
 {
 	writeln("Edit source/app.d to start your project.");
-	TUNAdapter adapter = new TUNAdapter("testInterface0");
+	Adapter adapter = new Adapter("testInterface0");
 
 	while(true)
 	{
