@@ -23,6 +23,7 @@
 #include<stdint.h>
 
 /* TODO: Update types here using stdint */
+//TODO: We could possibly use directly
 uint32_t createTun(char* interfaceName, int32_t iffFlags)
 {
     /* TODO: Add all required error checking */
@@ -56,11 +57,13 @@ uint32_t createTun(char* interfaceName, int32_t iffFlags)
     return tunFD;
 }
 
+//TOOD: Maybe use directly
 uint32_t destroyTun(uint32_t fd)
 {
     return close(fd);
 }
 
+//TODO: Maybe use directly
 uint32_t tunWrite(uint32_t fd, char* data, int length)
 {
     write(fd, data, length);
@@ -72,6 +75,7 @@ uint32_t tunWrite(uint32_t fd, char* data, int length)
 *
 * (FIXME: For now we just read 20 bytes)
 */
+//TODO: Maybe use directly
 uint32_t tunRead(uint32_t fd, char* data, int amount)
 {
     return read(fd, data, amount);
