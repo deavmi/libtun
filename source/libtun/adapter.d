@@ -1,7 +1,7 @@
 module libtun.adapter;
 
-extern (C) int ioctl(int fd, ulong request, void* data);
-extern (C) int open(char* path, int flags);
+// extern (C) int ioctl(int fd, ulong request, void* data);
+// extern (C) int open(char* path, int flags);
 
 import core.stdc.stdio;
 
