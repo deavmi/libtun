@@ -31,7 +31,7 @@ public class Adapter
         tunFD = createTun(cast(char*)interfaceName, 4096|adapterType);
         if(tunFD < 0)
         {
-            throw new TUNException("Error creating tun device");
+            throw new AdapterException("Error creating tun device");
         }
 
         /* TODO: Get device MTU and add functions for setting it */
@@ -43,7 +43,7 @@ public class Adapter
     {
         if(isClosed)
         {
-            throw new TUNException("Cannot operate on closed tunnel device");
+            throw new AdapterException("Cannot operate on closed tunnel device");
         }
     }
 
@@ -95,7 +95,7 @@ public class Adapter
       
         if(status < 0)
         {
-            throw new TUNException("Read failed");
+            throw new AdapterException("Read failed");
         }
         else if(status == 0)
         {
@@ -135,7 +135,7 @@ public class Adapter
    
 }
 
-public final class TUNException : Exception
+public final class AdapterException : Exception
 {
     this(string msg)
     {
